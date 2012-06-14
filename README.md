@@ -101,6 +101,7 @@ Install packages using the new hotness in Python package management...[`pip`](ht
 - interpreter: The Python interpreter to use. default is `python2.6`
 - owner: The owner for the virtualenv
 - group: The group owner of the file (string or id)
+- options : Command line options (string)
 
 # Example
 
@@ -116,6 +117,14 @@ Install packages using the new hotness in Python package management...[`pip`](ht
       interpreter "python2.4"
       owner "ubuntu"
       group "ubuntu"
+      action :create
+    end
+
+    # create a Python 2.6 virtualenv with access to the global packages owned by ubuntu user
+    python_virtualenv "/home/ubuntu/my_old_ve" do
+      owner "ubuntu"
+      group "ubuntu"
+      options "--system-site-packages"
       action :create
     end
 
