@@ -46,8 +46,7 @@ action :install do
   end
 
   if install_version
-    description = []
-    description << "install package #{@new_resource} version #{install_version}"
+    description = "install package #{@new_resource} version #{install_version}"
     converge_by(description) do
        Chef::Log.info("Installing #{@new_resource} version #{install_version}")
        status = install_package(@new_resource.package_name, install_version, timeout)
@@ -64,8 +63,7 @@ action :upgrade do
 
   if @current_resource.version != candidate_version
     orig_version = @current_resource.version || "uninstalled"
-    description = []
-    description << "upgrade #{@current_resource} version from #{@current_resource.version} to #{candidate_version}"
+    description = "upgrade #{@current_resource} version from #{@current_resource.version} to #{candidate_version}"
     converge_by(description) do
        Chef::Log.info("Upgrading #{@new_resource} version from #{orig_version} to #{candidate_version}")
        status = upgrade_package(@new_resource.package_name, candidate_version, timeout)
@@ -81,8 +79,7 @@ action :remove do
   end
 
   if removing_package?
-    description = []
-    description << "remove package #{@new_resource}"
+    description = "remove package #{@new_resource}"
     converge_by(description) do
        Chef::Log.info("Removing #{@new_resource}")
        remove_package(@current_resource.package_name, @new_resource.version, timeout)
