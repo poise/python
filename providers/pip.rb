@@ -22,6 +22,10 @@ require 'chef/mixin/shell_out'
 require 'chef/mixin/language'
 include Chef::Mixin::ShellOut
 
+def whyrun_supported?
+  true
+end
+
 # the logic in all action methods mirror that of
 # the Chef::Provider::Package which will make
 # refactoring into core chef easy
@@ -42,10 +46,10 @@ action :install do
   end
 
   if install_version
-    Chef::Log.info("Installing #{@new_resource} version #{install_version}")
-    status = install_package(@new_resource.package_name, install_version, timeout)
-    if status
-      @new_resource.updated_by_last_action(true)
+    description = "install package #{@new_resource} version #{install_version}"
+    converge_by(description) do
+       Chef::Log.info("Installing #{@new_resource} version #{install_version}")
+       status = install_package(@new_resource.package_name, install_version, timeout)
     end
   end
 end
@@ -59,10 +63,10 @@ action :upgrade do
 
   if @current_resource.version != candidate_version
     orig_version = @current_resource.version || "uninstalled"
-    Chef::Log.info("Upgrading #{@new_resource} version from #{orig_version} to #{candidate_version}")
-    status = upgrade_package(@new_resource.package_name, candidate_version, timeout)
-    if status
-      @new_resource.updated_by_last_action(true)
+    description = "upgrade #{@current_resource} version from #{@current_resource.version} to #{candidate_version}"
+    converge_by(description) do
+       Chef::Log.info("Upgrading #{@new_resource} version from #{orig_version} to #{candidate_version}")
+       status = upgrade_package(@new_resource.package_name, candidate_version, timeout)
     end
   end
 end
@@ -75,9 +79,11 @@ action :remove do
   end
 
   if removing_package?
-    Chef::Log.info("Removing #{@new_resource}")
-    remove_package(@current_resource.package_name, @new_resource.version, timeout)
-    @new_resource.updated_by_last_action(true)
+    description = "remove package #{@new_resource}"
+    converge_by(description) do
+       Chef::Log.info("Removing #{@new_resource}")
+       remove_package(@current_resource.package_name, @new_resource.version, timeout)
+    end
   else
   end
 end

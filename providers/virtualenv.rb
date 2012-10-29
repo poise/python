@@ -22,6 +22,10 @@ require 'chef/mixin/shell_out'
 require 'chef/mixin/language'
 include Chef::Mixin::ShellOut
 
+def whyrun_supported?
+  true
+end
+
 action :create do
   unless exists?
     Chef::Log.info("Creating virtualenv #{@new_resource} at #{@new_resource.path}")
@@ -35,9 +39,11 @@ end
 
 action :delete do
   if exists?
-    Chef::Log.info("Deleting virtualenv #{@new_resource} at #{@new_resource.path}")
-    FileUtils.rm_rf(@new_resource.path)
-    new_resource.updated_by_last_action(true)
+    description = "delete virtualenv #{@new_resource} at #{@new_resource.path}"
+    converge_by(description) do
+       Chef::Log.info("Deleting virtualenv #{@new_resource} at #{@new_resource.path}")
+       FileUtils.rm_rf(@new_resource.path)
+    end
   end
 end
 
