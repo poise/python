@@ -18,38 +18,22 @@
 # limitations under the License.
 #
 
-# COOK-1016 Handle RHEL/CentOS namings of python packages, by installing EPEL repo & package
-# This implementation was determined a stopgap measure until CHEF-2410 is implemented and widespread.
-if node['platform'] == 'centos' || node['platform'] == 'redhat'
-  major_version = node['platform_version'].split('.').first.to_i
-  if major_version == 5
-    include_recipe 'yum::epel'
-  else
-    # Do nothing.
-  end
-end
+major_version = node['platform_version'].split('.').first.to_i
 
-python_pkgs = if node['platform'] == 'centos' || node['platform'] == 'redhat'
-                major_version = node['platform_version'].split('.').first.to_i
-                if major_version == 6
-                  ["python", "python-devel"]
-                else
-                  ["python26", "python26-devel"]
-                end
-              else
-                value_for_platform(
-                                   ["debian","ubuntu"] => {
-                                     "default" => ["python","python-dev"]
-                                   },
-                                   ["fedora","amazon"] => {
-                                     "default" => ["python","python-devel"]
-                                   },
-                                   ["freebsd"] => {
-                                     "default" => ["python"]
-                                   },
-                                   "default" => ["python","python-dev"]
-                                   )
-              end
+# COOK-1016 Handle RHEL/CentOS namings of python packages, by installing EPEL
+# repo & package
+if platform_family?('rhel') && major_version < 6
+  include_recipe 'yum::epel'
+  python_pkgs = ["python26", "python26-devel"]
+  node['python']['binary'] = "/usr/bin/python26"
+else
+  python_pkgs = value_for_platform_family(
+                  "debian" => ["python","python-dev"],
+                  "rhel" => ["python","python-devel"],
+                  "freebsd" => ["python"],
+                  "default" => ["python","python-dev"]
+                )
+end
 
 python_pkgs.each do |pkg|
   package pkg do
