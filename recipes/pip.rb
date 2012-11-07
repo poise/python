@@ -18,7 +18,7 @@
 # limitations under the License.
 #
 
-if platform_family?("rhel")
+if platform_family?("rhel") and node['python']['install_method'] == 'package'
   pip_binary = "/usr/bin/pip"
 else
   pip_binary = "/usr/local/bin/pip"
