@@ -31,6 +31,7 @@ else
                   "debian" => ["python","python-dev"],
                   "rhel" => ["python","python-devel"],
                   "freebsd" => ["python"],
+                  "smartos" => ["python27"],
                   "default" => ["python","python-dev"]
                 )
 end
