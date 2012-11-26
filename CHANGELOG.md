@@ -1,3 +1,9 @@
+## v1.1.0:
+
+* [COOK-1715] - Add user and group to python_pip
+* [COOK-1727] - Python cookbook cannot install `pip` on CentOS
+  versions < 6
+
 ## v1.0.8:
 
 * [COOK-1016] - python package needs separate names for centos/rhel 5.x vs 6.x
