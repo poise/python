@@ -1,3 +1,9 @@
+## v1.2.0:
+
+* [COOK-1866] - /usr/bin is not a pip binary location in source
+  installs on RHEL
+* [COOK-1925] - add smartos support
+
 ## v1.1.0:
 
 * [COOK-1715] - Add user and group to python_pip
