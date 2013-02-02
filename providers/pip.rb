@@ -131,7 +131,14 @@ def candidate_version
 end
 
 def install_package(version)
-  pip_cmd('install', version == 'latest' ? '' : "==#{version}")
+  # if a version isn't specified (latest), is a source archive (ex. http://my.package.repo/SomePackage-1.0.4.zip),
+  # or from a VCS (ex. git+https://git.repo/some_pkg.git) then do not append a version as this will break the source link
+  if version == 'latest' || @new_resource.name.downcase.start_with?('http:') || ['git', 'hg', 'svn'].include?(@new_resource.name.downcase.split('+')[0])
+    version = ''
+  else
+    version = "==#{version}"
+  end
+  pip_cmd('install', version)
 end
 
 def upgrade_package(version)
