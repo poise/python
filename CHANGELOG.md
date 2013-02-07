@@ -1,3 +1,8 @@
+## v1.2.2:
+
+* [COOK-2297] - more gracefully handle pip packages from VCS and
+  source archives
+
 ## v1.2.0:
 
 * [COOK-1866] - /usr/bin is not a pip binary location in source
