@@ -19,6 +19,13 @@
 #
 
 actions :install, :upgrade, :remove, :purge
+default_action :install
+
+# Covers 0.10.8 and earlier :default_action
+def initialize(*args)
+  super
+  @action = :install
+end
 
 attribute :package_name, :kind_of => String, :name_attribute => true
 attribute :version, :default => nil
