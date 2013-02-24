@@ -114,10 +114,8 @@ def current_installed_version
       delimeter = /\s/
       version_check_cmd = "pip --version"
     end
-    p = shell_out!(version_check_cmd)
-    p.stdout.split(delimeter)[1].strip
-  rescue Chef::Exceptions::ShellCommandFailed
-  rescue Mixlib::ShellOut::ShellCommandFailed
+    result = shell_out(version_check_cmd)
+    (result.exitstatus == 0) ? result.stdout.split(delimeter)[1].strip : nil
   end
 end
 
