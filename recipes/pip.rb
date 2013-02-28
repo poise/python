@@ -31,7 +31,7 @@ end
 # http://stackoverflow.com/questions/4324558/whats-the-proper-way-to-install-pip-virtualenv-and-distribute-for-python
 # https://bitbucket.org/ianb/pip/issue/104/pip-uninstall-on-ubuntu-linux
 remote_file "#{Chef::Config[:file_cache_path]}/distribute_setup.py" do
-  source "http://python-distribute.org/distribute_setup.py"
+  source node['python']['distribute_script_url']
   mode "0644"
   not_if { ::File.exists?(pip_binary) }
 end
@@ -39,7 +39,7 @@ end
 execute "install-pip" do
   cwd Chef::Config[:file_cache_path]
   command <<-EOF
-  #{node['python']['binary']} distribute_setup.py
+  #{node['python']['binary']} distribute_setup.py --download-base=#{node['python']['distribute_option']['download_base']}
   #{::File.dirname(pip_binary)}/easy_install pip
   EOF
   not_if { ::File.exists?(pip_binary) }
