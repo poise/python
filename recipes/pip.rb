@@ -23,7 +23,7 @@ if platform_family?("rhel") and node['python']['install_method'] == 'package'
 elsif platform_family?("smartos")
   pip_binary = "/opt/local/bin/pip"
 else
-  pip_binary = "/usr/local/bin/pip"
+  pip_binary = "#{node['python']['prefix_dir']}/bin/pip"
 end
 
 # Ubuntu's python-setuptools, python-pip and python-virtualenv packages
