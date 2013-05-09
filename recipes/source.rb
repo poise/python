@@ -22,7 +22,7 @@ configure_options = node['python']['configure_options'].join(" ")
 
 packages = value_for_platform_family(
              "rhel" => ["openssl-devel","bzip2-devel","zlib-devel","expat-devel","db4-devel","sqlite-devel","ncurses-devel","readline-devel"],
-             "default" => ["libssl-dev","libbz2-dev","zlib1g-dev","libexpat1-dev","libdb4.8-dev","libsqlite3-dev","libncursesw5-dev","libncurses5-dev","libreadline-dev"]
+             "default" => ["libssl-dev","libbz2-dev","zlib1g-dev","libexpat1-dev","libdb-dev","libsqlite3-dev","libncursesw5-dev","libncurses5-dev","libreadline-dev"]
            )
 
 packages.each do |dev_pkg|
