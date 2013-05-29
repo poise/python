@@ -18,7 +18,9 @@
 # limitations under the License.
 #
 
-if platform_family?("rhel") and node['python']['install_method'] == 'package'
+if node['python']['install_method'] == 'source'
+  pip_binary = "#{node['python']['prefix_dir']}/bin/pip"
+elsif platform_family?("rhel")
   pip_binary = "/usr/bin/pip"
 elsif platform_family?("smartos")
   pip_binary = "/opt/local/bin/pip"
