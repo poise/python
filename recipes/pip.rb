@@ -18,7 +18,14 @@
 # limitations under the License.
 #
 
-if platform_family?("rhel") and node['python']['install_method'] == 'package'
+# Where does pip get installed?
+# platform/method: path (proof)
+# redhat/package: /usr/bin/pip (sha a8a3a3)
+# omnibus/source: /opt/local/bin/pip (sha 29ce9874)
+
+if node['python']['install_method'] == 'source'
+  pip_binary = "#{node['python']['prefix_dir']}/bin/pip"
+elsif platform_family?("rhel")
   pip_binary = "/usr/bin/pip"
 elsif platform_family?("smartos")
   pip_binary = "/opt/local/bin/pip"
