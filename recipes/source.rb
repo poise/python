@@ -18,6 +18,8 @@
 # limitations under the License.
 #
 
+include_recipe "build-essential"
+
 configure_options = node['python']['configure_options'].join(" ")
 
 packages = value_for_platform_family(
