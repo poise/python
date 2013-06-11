@@ -131,7 +131,7 @@ end
 def install_package(version)
   # if a version isn't specified (latest), is a source archive (ex. http://my.package.repo/SomePackage-1.0.4.zip),
   # or from a VCS (ex. git+https://git.repo/some_pkg.git) then do not append a version as this will break the source link
-  if version == 'latest' || new_resource.name.downcase.start_with?('http:', 'https:') || ['git', 'hg', 'svn'].include?(new_resource.name.downcase.split('+')[0])
+  if version == 'latest' || new_resource.package_name.downcase.start_with?('http:', 'https:') || ['git', 'hg', 'svn'].include?(new_resource.package_name.downcase.split('+')[0])
     version = ''
   else
     version = "==#{version}"
@@ -152,7 +152,7 @@ end
 def pip_cmd(subcommand, version='')
   options = { :timeout => new_resource.timeout, :user => new_resource.user, :group => new_resource.group }
   options[:environment] = { 'HOME' => ::File.expand_path("~#{new_resource.user}") } if new_resource.user
-  shell_out!("#{which_pip(new_resource)} #{subcommand} #{new_resource.options} #{new_resource.name}#{version}", options)
+  shell_out!("#{which_pip(new_resource)} #{subcommand} #{new_resource.options} #{new_resource.package_name}#{version}", options)
 end
 
 # TODO remove when provider is moved into Chef core
