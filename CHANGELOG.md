@@ -1,3 +1,10 @@
+## v1.3.4:
+
+### Bug
+
+- [COOK-3137]: `python_pip` LWRP cannot have differnent name and
+  `package_name`
+
 ## v1.3.2:
 
 ### Bug
