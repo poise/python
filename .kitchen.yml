@@ -42,3 +42,11 @@ suites:
   run_list:
   - recipe[python]
   attributes: {python: {install_method: "source"}}
+- name: exert
+  run_list:
+  - recipe[python]
+  - recipe[python::test_exert]
+- name: virtualenv
+  run_list: 
+  - recipe[python]
+  - recipe[python::test_virtualenv]

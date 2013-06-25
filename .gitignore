@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .vagrant
 Berksfile.lock
 *~
@@ -14,3 +15,9 @@ bin/*
 .bundle/*
 .kitchen/
 .kitchen.local.yml
+=======
+.bundle/
+.kitchen/
+.kitchen.local.yml
+*.lock
+>>>>>>>   - Improve the testing of the Python Cookbook
