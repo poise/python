@@ -40,8 +40,8 @@ suites:
 - name: exert
   run_list:
   - recipe[python]
-  - recipe[python::test_exert]
+  - recipe[python_test::test_exert]
 - name: virtualenv
   run_list: 
   - recipe[python]
-  - recipe[python::test_virtualenv]
+  - recipe[python_test::test_virtualenv]
