@@ -33,21 +33,40 @@ else
   pip_binary = "/usr/local/bin/pip"
 end
 
-# Ubuntu's python-setuptools, python-pip and python-virtualenv packages
-# are broken...this feels like Rubygems!
-# http://stackoverflow.com/questions/4324558/whats-the-proper-way-to-install-pip-virtualenv-and-distribute-for-python
-# https://bitbucket.org/ianb/pip/issue/104/pip-uninstall-on-ubuntu-linux
-remote_file "#{Chef::Config[:file_cache_path]}/distribute_setup.py" do
-  source node['python']['distribute_script_url']
+if node['python']['install_method'] == 'source'
+  ez_binary = "#{node['python']['prefix_dir']}/bin/easy_install"
+elsif platform_family?("rhel")
+  ez_binary = "/usr/bin/easy_install"
+elsif platform_family?("smartos")
+  ez_binary = "/opt/local/bin/easy_install"
+else
+  ez_binary = "/usr/local/bin/easy_install"
+end
+
+remote_file "#{Chef::Config[:file_cache_path]}/ez_setup.py" do
+  source node['python']['setuptools_script_url']
+  mode "0644"
+  not_if { ::File.exists?(ez_binary) }
+end
+
+remote_file "#{Chef::Config[:file_cache_path]}/get-pip.py" do
+  source node['python']['pip_script_url']
   mode "0644"
   not_if { ::File.exists?(pip_binary) }
+end
+
+execute "install-setuptools" do
+  cwd Chef::Config[:file_cache_path]
+  command <<-EOF
+  #{node['python']['binary']} ez_setup.py
+  EOF
+  not_if { ::File.exists?(ez_binary) }
 end
 
 execute "install-pip" do
   cwd Chef::Config[:file_cache_path]
   command <<-EOF
-  #{node['python']['binary']} distribute_setup.py --download-base=#{node['python']['distribute_option']['download_base']}
-  #{::File.dirname(pip_binary)}/easy_install pip
+  #{node['python']['binary']} get-pip.py
   EOF
   not_if { ::File.exists?(pip_binary) }
 end
