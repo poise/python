@@ -60,7 +60,7 @@ execute "install-setuptools" do
   command <<-EOF
   #{node['python']['binary']} ez_setup.py
   EOF
-  not_if { ::File.exists?(ez_binary) }
+  not_if "#{node['python']['binary']} -c 'import setuptools'"
 end
 
 execute "install-pip" do
