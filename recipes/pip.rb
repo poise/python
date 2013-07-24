@@ -33,20 +33,10 @@ else
   pip_binary = "/usr/local/bin/pip"
 end
 
-if node['python']['install_method'] == 'source'
-  ez_binary = "#{node['python']['prefix_dir']}/bin/easy_install"
-elsif platform_family?("rhel")
-  ez_binary = "/usr/bin/easy_install"
-elsif platform_family?("smartos")
-  ez_binary = "/opt/local/bin/easy_install"
-else
-  ez_binary = "/usr/local/bin/easy_install"
-end
-
 remote_file "#{Chef::Config[:file_cache_path]}/ez_setup.py" do
   source node['python']['setuptools_script_url']
   mode "0644"
-  not_if { ::File.exists?(ez_binary) }
+  not_if "#{node['python']['binary']} -c 'import setuptools'"
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/get-pip.py" do
