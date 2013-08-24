@@ -33,4 +33,3 @@ end
 python_pip "psutil" do
   action :install
 end
-

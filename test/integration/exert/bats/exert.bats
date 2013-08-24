@@ -11,4 +11,3 @@
 @test "virtualenv test environment should have boto working" {
     /tmp/kitchen-chef-solo/cache/virtualenv/bin/python -c 'import boto; boto.Version'
 }
-
