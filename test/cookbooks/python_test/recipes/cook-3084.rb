@@ -26,7 +26,7 @@ end
 python_virtualenv "cook-3084-interpreter" do
   # on EL5 the default python we install is called python26
   if !node['python']['install_method'].eql?("source") &&
-     platform_family?('rhel') && 
+     platform_family?('rhel') &&
      node['platform_version'].split('.').first.to_i < 6
     interpreter '/usr/bin/python26'
   else
