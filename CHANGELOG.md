@@ -3,6 +3,17 @@ python Cookbook CHANGELOG
 This file is used to list changes made in each version of the python cookbook.
 
 
+v1.4.0
+------
+### New Feature
+- **[COOK-3248](https://tickets.opscode.com/browse/COOK-3248)** - Improve testing suite
+
+### Improvement
+- **[COOK-3125](https://tickets.opscode.com/browse/COOK-3125)** - Don't use `normal` attributes
+
+### Bug
+- **[COOK-3084](https://tickets.opscode.com/browse/COOK-3084)** - Fix `python_virtualenv` on EL 5
+
 v1.3.6
 ------
 ### Bug
