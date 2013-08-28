@@ -95,7 +95,7 @@ Install packages using the new hotness in Python package management...[`pip`](ht
 # Attribute Parameters
 
 - path: name attribute. The path where the virtualenv will be created
-- interpreter: The Python interpreter to use. default is `python2.6`
+- interpreter: The Python interpreter to use. default is null (i.e. use whatever python the virtualenv command is using).
 - owner: The owner for the virtualenv
 - group: The group owner of the file (string or id)
 - options : Command line options (string)

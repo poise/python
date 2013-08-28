@@ -35,12 +35,16 @@ platforms:
 suites:
 - name: default
   run_list:
+  - recipe[minitest-handler]
   - recipe[python]
+  - recipe[python_test::cook-3084]
   attributes: {}
 
 - name: source
   run_list:
+  - recipe[minitest-handler]
   - recipe[python]
+  - recipe[python_test::cook-3084]
   attributes: {python: {install_method: "source"}}
 - name: exert
   excludes: ["centos-5.9"]
@@ -48,7 +52,6 @@ suites:
   - recipe[python]
   - recipe[python_test::test_exert]
 - name: virtualenv
-  excludes: ["centos-5.9"]
   run_list:
   - recipe[python]
   - recipe[python_test::test_virtualenv]

@@ -1,9 +1,9 @@
 #
-# Author:: Sean Porter <portertech@hw-ops.com>
+# Author:: Alex Kiernan (<alexk@alexandalex.com>)
 # Cookbook Name:: python
-# Recipe:: test_virtualenv
+# Recipe:: cook-3084
 #
-# Copyright 2013, Heavy Water Operations, LLC.
+# Copyright 2013, Alex Kiernan
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
 # limitations under the License.
 #
 
-python_virtualenv "/tmp/virtualenv" do
-  owner "root"
-  group "root"
-  action :create
+include_recipe "python"
+
+python_virtualenv "cook-3084" do
 end
 
-python_virtualenv "isolated python environment" do
-  path "/tmp/tobedestroyed"
-  action :create
-end
-
-python_virtualenv "deleting the isolated python environment" do
-  path "/tmp/tobedestroyed"
-  action :delete
+python_virtualenv "cook-3084-interpreter" do
+  # on EL5 the default python we install is called python26
+  if !node['python']['install_method'].eql?("source") &&
+     platform_family?('rhel') && 
+     node['platform_version'].split('.').first.to_i < 6
+    interpreter '/usr/bin/python26'
+  else
+    interpreter 'python'
+  end
 end
