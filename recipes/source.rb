@@ -21,6 +21,7 @@
 include_recipe "build-essential"
 
 configure_options = node['python']['configure_options'].join(" ")
+make_options = node['python']['make_options'].join(" ")
 
 packages = value_for_platform_family(
              "rhel" => ["openssl-devel","bzip2-devel","zlib-devel","expat-devel","db4-devel","sqlite-devel","ncurses-devel","readline-devel"],
@@ -46,7 +47,7 @@ bash "build-and-install-python" do
   code <<-EOF
   tar -jxvf Python-#{version}.tar.bz2
   (cd Python-#{version} && ./configure #{configure_options})
-  (cd Python-#{version} && make && make install)
+  (cd Python-#{version} && make && make #{make_options})
   EOF
   environment({
       "LDFLAGS" => "-L#{node['python']['prefix_dir']} -L/usr/lib",
