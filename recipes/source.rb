@@ -57,3 +57,12 @@ bash "build-and-install-python" do
   }) if platform?("ubuntu") && node['platform_version'].to_f >= 12.04
   not_if { ::File.exists?(install_path) }
 end
+
+# Link install as the default python, to support Python 3.x
+# Otherwise the pip and virtualenv recipes won't work properly
+link node['python']['binary'] do
+  to install_path
+  not_if { ::File.exists?(node['python']['binary']) }
+end
+
+
