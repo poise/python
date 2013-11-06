@@ -3,6 +3,11 @@ python Cookbook CHANGELOG
 This file is used to list changes made in each version of the python cookbook.
 
 
+v1.4.4
+------
+[COOK-3816] - Including ez_setup script with cookbook instead of downloading from the internet
+
+
 v1.4.2
 ------
 ### Bug
