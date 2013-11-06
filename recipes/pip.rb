@@ -33,14 +33,14 @@ else
   pip_binary = "/usr/local/bin/pip"
 end
 
-remote_file "#{Chef::Config[:file_cache_path]}/ez_setup.py" do
-  source node['python']['setuptools_script_url']
+cookbook_file "#{Chef::Config[:file_cache_path]}/ez_setup.py" do
+  source 'ez_setup.py'
   mode "0644"
   not_if "#{node['python']['binary']} -c 'import setuptools'"
 end
 
-remote_file "#{Chef::Config[:file_cache_path]}/get-pip.py" do
-  source node['python']['pip_script_url']
+cookbook_file "#{Chef::Config[:file_cache_path]}/get-pip.py" do
+  source 'get-pip.py'
   mode "0644"
   not_if { ::File.exists?(pip_binary) }
 end
