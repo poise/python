@@ -35,10 +35,11 @@ This cookbook includes LWRPs for managing:
 - pip packages
 - virtualenv isolated Python environments
 
-### `python_pip`
+### python_pip
 Install packages using the new hotness in Python package management...[`pip`](http://pypi.python.org/pypi/pip).  Yo dawg...easy_install is so 2009, you better ask your local Pythonista if you don't know! The usage semantics are like that of any normal package provider.
 
 #### Actions
+
 - :install: Install a pip package - if version is provided, install that specific version (default)
 - :upgrade: Upgrade a pip package - if version is provided, upgrade to that specific version
 - :remove: Remove a pip package
@@ -47,6 +48,7 @@ Install packages using the new hotness in Python package management...[`pip`](ht
 - :purge: Purge a pip package (this usually entails removing configuration files as well as the package itself).  With pip packages this behaves the same as `:remove`
 
 #### Attribute Parameters
+
 - package_name: name attribute. The name of the pip package to install
 - version: the version of the package to install/upgrade.  If no version is given latest is assumed.
 - virtualenv: virtualenv environment to install pip package into
@@ -54,6 +56,7 @@ Install packages using the new hotness in Python package management...[`pip`](ht
 - timeout: timeout in seconds for the command to execute. Useful for pip packages that may take a long time to install. Default 900 seconds.
 
 #### Examples
+
 ```ruby
 # install latest gunicorn into system path
 python_pip "gunicorn"
@@ -78,7 +81,7 @@ package "django" do
 end
 ```
 
-### `python_virtualenv`
+### python_virtualenv
 [`virtualenv`](http://pypi.python.org/pypi/virtualenv) is a great tool that creates isolated python environments.  Think of it as RVM without all those hipsters and tight jeans.
 
 #### Actions
@@ -93,6 +96,7 @@ end
 - options : Command line options (string)
 
 #### Examples
+
 ```ruby
 # create a 2.6 virtualenv owned by ubuntu user
 python_virtualenv "/home/ubuntu/my_cool_ve" do
