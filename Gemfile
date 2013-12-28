@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'foodcritic'
+gem 'foodcritic', '>= 3.0.3'
 gem 'berkshelf', '~> 2.0'
 gem 'chefspec', '~> 3.0'
