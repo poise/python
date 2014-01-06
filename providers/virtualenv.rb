@@ -34,10 +34,9 @@ action :create do
     end
     Chef::Log.info("Creating virtualenv #{new_resource} at #{new_resource.path}")
     interpreter = new_resource.interpreter ? " --python=#{new_resource.interpreter}" : ""
-    execute "#{virtualenv_cmd}#{interpreter} #{new_resource.options} #{new_resource.path}" do
-      user new_resource.owner if new_resource.owner
-      group new_resource.group if new_resource.group
-    end
+    options = { :user => new_resource.owner, :group => new_resource.group }
+    options[:environment] = { 'HOME' => ::File.expand_path("~#{new_resource.owner}") } if new_resource.owner
+    shell_out!("#{virtualenv_cmd}#{interpreter} #{new_resource.options} #{new_resource.path}", options)
     new_resource.updated_by_last_action(true)
   end
 end
