@@ -37,6 +37,7 @@ action :create do
     execute "#{virtualenv_cmd}#{interpreter} #{new_resource.options} #{new_resource.path}" do
       user new_resource.owner if new_resource.owner
       group new_resource.group if new_resource.group
+      environment ({ 'HOME' => ::Dir.home(new_resource.owner) }) if new_resource.owner
     end
     new_resource.updated_by_last_action(true)
   end
