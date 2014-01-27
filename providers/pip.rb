@@ -151,7 +151,10 @@ end
 
 def pip_cmd(subcommand, version='')
   options = { :timeout => new_resource.timeout, :user => new_resource.user, :group => new_resource.group }
-  options[:environment] = { 'HOME' => ::File.expand_path("~#{new_resource.user}") } if new_resource.user
+  environment = Hash.new
+  environment.merge!({ 'HOME' => ::File.expand_path("~#{new_resource.user}") }) if new_resource.user
+  environment.merge!(new_resource.environment) if new_resource.environment
+  options[:environment] = environment
   shell_out!("#{which_pip(new_resource)} #{subcommand} #{new_resource.options} #{new_resource.package_name}#{version}", options)
 end
 
