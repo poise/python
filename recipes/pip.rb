@@ -25,7 +25,7 @@
 
 if node['python']['install_method'] == 'source'
   pip_binary = "#{node['python']['prefix_dir']}/bin/pip"
-elsif platform_family?("rhel")
+elsif platform_family?("rhel", "fedora")
   pip_binary = "/usr/bin/pip"
 elsif platform_family?("smartos")
   pip_binary = "/opt/local/bin/pip"
