@@ -112,7 +112,7 @@ def current_installed_version
     # incase you upgrade pip with pip!
     if new_resource.package_name.eql?('pip')
       delimeter = /\s/
-      version_check_cmd = "pip --version"
+      version_check_cmd = "#{which_pip(@new_resource)} --version"
     end
     result = shell_out(version_check_cmd)
     (result.exitstatus == 0) ? result.stdout.split(delimeter)[1].strip : nil
