@@ -32,7 +32,10 @@ packages.each do |dev_pkg|
   package dev_pkg
 end
 
-version = node['python']['version']
+version = node.default['python']['version'] ||
+          node.set['python']['version'] ||
+          node.override['python']['version'] ||
+          node['python']['install_version']
 install_path = "#{node['python']['prefix_dir']}/bin/python#{version.split(/(^\d+\.\d+)/)[1]}"
 
 remote_file "#{Chef::Config[:file_cache_path]}/Python-#{version}.tgz" do
@@ -63,6 +66,12 @@ end
 link node['python']['binary'] do
   to install_path
   not_if { ::File.exists?(node['python']['binary']) }
+end
+
+ruby_block 'set-python-version' do
+  block do
+    node.default['python']['version'] = version
+  end
 end
 
 
