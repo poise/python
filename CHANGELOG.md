@@ -2,6 +2,17 @@ python Cookbook CHANGELOG
 =========================
 This file is used to list changes made in each version of the python cookbook.
 
+v1.4.6
+------
+
+- **[#61](https://github.com/poise/python/pull/61)** – Python packages specified for Fedora platform.
+- **[#62](https://github.com/poise/python/pull/62)** – Use tgz archive instead of tbz2 as new releases no longer offer tb2
+- **[#72](https://github.com/poise/python/pull/72)** – Set $HOME in virtualenv provider
+- **[#74](https://github.com/poise/python/pull/74)** – Allow setting of virtualenv version
+- **[#78](https://github.com/poise/python/pull/78)** – AFix the pip version_check_cmd to use the virtualenv pip when applicable
+- **[#79](https://github.com/poise/python/pull/79)** – Add ability in pip lwrp to send custom env vars
+- **[#80](https://github.com/poise/python/pull/80)** – Update to yum3 yum-epel cookbook
+- Remove ez_setup.py usage and upgrade get-pip.py to 1.5.2.
 
 v1.4.4
 ------
