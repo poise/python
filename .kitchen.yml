@@ -39,6 +39,11 @@ suites:
   - recipe[python]
   - recipe[python_test::cook-3084]
   attributes: {}
+- name: pip
+  run_list:
+  - recipe[minitest-handler]
+  - recipe[python]
+  - recipe[python_test::test_pip]
 
 - name: source
   run_list:
