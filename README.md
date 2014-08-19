@@ -77,13 +77,6 @@ python_pip "django" do
 end
 ```
 
-```ruby
-# use this provider with the core package resource
-package "django" do
-  provider Chef::Provider::PythonPip
-end
-```
-
 ### python_virtualenv
 [`virtualenv`](http://pypi.python.org/pypi/virtualenv) is a great tool that creates isolated python environments.  Think of it as RVM without all those hipsters and tight jeans.
 
