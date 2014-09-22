@@ -48,6 +48,6 @@ execute "install-pip" do
 end
 
 python_pip 'setuptools' do
-  action :upgrade
+  action :upgrade unless node['python']['setuptools_version']
   version node['python']['setuptools_version']
 end
