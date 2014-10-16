@@ -66,7 +66,7 @@ python_pip "gunicorn"
 
 # target a virtualenv
 python_pip "gunicorn" do
-  virtualenv "/home/ubunut/my_ve"
+  virtualenv "/home/ubuntu/my_ve"
 end
 ```
 
