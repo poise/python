@@ -22,23 +22,23 @@ v1.4.4
 v1.4.2
 ------
 ### Bug
-- **[COOK-3796](https://tickets.opscode.com/browse/COOK-3796)** - Virtualenv can fail
+- **[COOK-3796](https://tickets.chef.io/browse/COOK-3796)** - Virtualenv can fail
 
 ### Improvement
-- **[COOK-3719](https://tickets.opscode.com/browse/COOK-3719)** - Allow alternative install python, update pip location
-- **[COOK-3703](https://tickets.opscode.com/browse/COOK-3703)** - Create symlink for source built python [python3 support]
+- **[COOK-3719](https://tickets.chef.io/browse/COOK-3719)** - Allow alternative install python, update pip location
+- **[COOK-3703](https://tickets.chef.io/browse/COOK-3703)** - Create symlink for source built python [python3 support]
 
 
 v1.4.0
 ------
 ### New Feature
-- **[COOK-3248](https://tickets.opscode.com/browse/COOK-3248)** - Improve testing suite
+- **[COOK-3248](https://tickets.chef.io/browse/COOK-3248)** - Improve testing suite
 
 ### Improvement
-- **[COOK-3125](https://tickets.opscode.com/browse/COOK-3125)** - Don't use `normal` attributes
+- **[COOK-3125](https://tickets.chef.io/browse/COOK-3125)** - Don't use `normal` attributes
 
 ### Bug
-- **[COOK-3084](https://tickets.opscode.com/browse/COOK-3084)** - Fix `python_virtualenv` on EL 5
+- **[COOK-3084](https://tickets.chef.io/browse/COOK-3084)** - Fix `python_virtualenv` on EL 5
 
 v1.3.6
 ------
